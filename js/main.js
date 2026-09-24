@@ -1,106 +1,96 @@
 (() => {
-  document.documentElement.classList.remove("no-js");
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const canHover = window.matchMedia("(hover: hover)").matches;
 
-  // Mobile navigation
-  const toggle = document.querySelector(".nav-toggle");
-  const nav = document.getElementById("site-nav");
-  if (toggle && nav) {
-    const setOpen = (open) => {
-      nav.classList.toggle("is-open", open);
-      toggle.setAttribute("aria-expanded", String(open));
-    };
-    toggle.addEventListener("click", () => setOpen(!nav.classList.contains("is-open")));
-    nav.addEventListener("click", (e) => { if (e.target.closest("a")) setOpen(false); });
-    document.addEventListener("keydown", (e) => { if (e.key === "Escape") setOpen(false); });
-  }
-
-  // Reveal on scroll
-  const revealEls = document.querySelectorAll(".reveal");
-  if ("IntersectionObserver" in window && !reduceMotion) {
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("is-visible");
-          io.unobserve(entry.target);
-        }
-      });
-    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
-    revealEls.forEach((el) => io.observe(el));
-  } else {
-    revealEls.forEach((el) => el.classList.add("is-visible"));
-  }
-
-  // Hover-to-play preview clips on project cards
-  document.querySelectorAll("[data-hover-video]").forEach((card) => {
+  // Preview clip on the rigging card: plays on hover, or while on screen for touch devices
+  document.querySelectorAll("[data-preview]").forEach((card) => {
     const video = card.querySelector("video");
     if (!video || reduceMotion) return;
     const play = () => { video.play().catch(() => {}); };
     const stop = () => { video.pause(); };
-    card.addEventListener("mouseenter", play);
-    card.addEventListener("focus", play);
-    card.addEventListener("mouseleave", stop);
-    card.addEventListener("blur", stop);
+    if (canHover) {
+      card.addEventListener("mouseenter", play);
+      card.addEventListener("mouseleave", stop);
+      card.addEventListener("focus", play);
+      card.addEventListener("blur", stop);
+    } else if ("IntersectionObserver" in window) {
+      new IntersectionObserver((entries) => {
+        entries.forEach((entry) => (entry.isIntersecting ? play() : stop()));
+      }, { threshold: 0.6 }).observe(video);
+    }
   });
 
-  // Render / texture-pass switchers
+  // Render / map switcher on the props page
   document.querySelectorAll("[data-passes]").forEach((viewer) => {
+    const stage = viewer.querySelector(".passes-stage");
     const tabs = [...viewer.querySelectorAll("[role=tab]")];
-    const imgs = [...viewer.querySelectorAll(".passes-stage img")];
+    const imgs = [...stage.querySelectorAll("img")];
     const select = (i) => {
-      tabs.forEach((t, j) => {
-        t.setAttribute("aria-selected", String(i === j));
-        t.tabIndex = i === j ? 0 : -1;
+      tabs.forEach((tab, j) => {
+        tab.setAttribute("aria-selected", String(i === j));
+        tab.tabIndex = i === j ? 0 : -1;
       });
       imgs.forEach((img, j) => {
         img.classList.toggle("is-active", i === j);
-        if (i === j && img.dataset.src) { img.src = img.dataset.src; delete img.dataset.src; }
+        img.setAttribute("aria-hidden", String(i !== j));
       });
+      stage.setAttribute("aria-labelledby", tabs[i].id);
     };
     tabs.forEach((tab, i) => {
       tab.addEventListener("click", () => select(i));
       tab.addEventListener("keydown", (e) => {
-        const step = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
-        if (!step) return;
+        let next = null;
+        if (e.key === "ArrowRight") next = (i + 1) % tabs.length;
+        else if (e.key === "ArrowLeft") next = (i - 1 + tabs.length) % tabs.length;
+        else if (e.key === "Home") next = 0;
+        else if (e.key === "End") next = tabs.length - 1;
+        if (next === null) return;
         e.preventDefault();
-        const next = (i + step + tabs.length) % tabs.length;
         select(next);
         tabs[next].focus();
       });
     });
-    // Warm the cache for the other passes once the viewer is near the viewport
-    if ("IntersectionObserver" in window) {
-      const warm = new IntersectionObserver((entries) => {
-        if (!entries[0].isIntersecting) return;
-        imgs.forEach((img) => { if (img.dataset.src) { img.src = img.dataset.src; delete img.dataset.src; } });
-        warm.disconnect();
-      }, { rootMargin: "400px" });
-      warm.observe(viewer);
-    }
   });
 
-  // Lightbox
+  // Copy email address
+  document.querySelectorAll("[data-copy]").forEach((button) => {
+    const label = button.textContent;
+    button.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(button.dataset.copy);
+        button.textContent = "Copied";
+      } catch {
+        window.location.href = "mailto:" + button.dataset.copy;
+        return;
+      }
+      setTimeout(() => { button.textContent = label; }, 2000);
+    });
+  });
+
+  // Lightbox for gallery images
   const links = [...document.querySelectorAll("a[data-lightbox]")];
   if (links.length) {
+    const icon = (d) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${d}"/></svg>`;
     const box = document.createElement("div");
     box.className = "lightbox";
     box.setAttribute("role", "dialog");
     box.setAttribute("aria-modal", "true");
     box.setAttribute("aria-label", "Image viewer");
-    const icon = (d) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${d}"/></svg>`;
     box.innerHTML = `
       <span class="lb-count" aria-live="polite"></span>
       <img alt="">
-      <p class="lightbox-caption"></p>
+      <p class="lb-caption"></p>
       <button class="lb-close" type="button" aria-label="Close">${icon("M18 6 6 18M6 6l12 12")}</button>
       <button class="lb-prev" type="button" aria-label="Previous image">${icon("m15 18-6-6 6-6")}</button>
       <button class="lb-next" type="button" aria-label="Next image">${icon("m9 18 6-6-6-6")}</button>`;
     document.body.appendChild(box);
+
     const img = box.querySelector("img");
-    const caption = box.querySelector(".lightbox-caption");
+    const caption = box.querySelector(".lb-caption");
     const count = box.querySelector(".lb-count");
-    const btnPrev = box.querySelector(".lb-prev");
-    const btnNext = box.querySelector(".lb-next");
+    const closeBtn = box.querySelector(".lb-close");
+    const prevBtn = box.querySelector(".lb-prev");
+    const nextBtn = box.querySelector(".lb-next");
     let group = [];
     let index = 0;
     let opener = null;
@@ -111,10 +101,14 @@
       const thumb = link.querySelector("img");
       img.src = link.href;
       img.alt = thumb ? thumb.alt : "";
-      caption.textContent = link.dataset.caption || (thumb ? thumb.alt : "");
+      caption.textContent = link.dataset.caption || "";
       count.textContent = group.length > 1 ? `${index + 1} / ${group.length}` : "";
-      btnPrev.hidden = btnNext.hidden = group.length < 2;
-      [group[index - 1], group[index + 1]].forEach((l) => { if (l) new Image().src = l.href; });
+      prevBtn.hidden = nextBtn.hidden = group.length < 2;
+      // Warm the neighbours so arrowing through is instant
+      [index - 1, index + 1].forEach((n) => {
+        const l = group[(n + group.length) % group.length];
+        if (l) new Image().src = l.href;
+      });
     };
     const open = (link) => {
       opener = link;
@@ -122,7 +116,7 @@
       box.classList.add("is-open");
       document.body.style.overflow = "hidden";
       show(group.indexOf(link));
-      box.querySelector(".lb-close").focus();
+      closeBtn.focus();
     };
     const close = () => {
       box.classList.remove("is-open");
@@ -131,10 +125,14 @@
       if (opener) opener.focus();
     };
 
-    links.forEach((link) => link.addEventListener("click", (e) => { e.preventDefault(); open(link); }));
-    box.querySelector(".lb-close").addEventListener("click", close);
-    btnPrev.addEventListener("click", () => show(index - 1));
-    btnNext.addEventListener("click", () => show(index + 1));
+    links.forEach((link) => link.addEventListener("click", (e) => {
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
+      e.preventDefault();
+      open(link);
+    }));
+    closeBtn.addEventListener("click", close);
+    prevBtn.addEventListener("click", () => show(index - 1));
+    nextBtn.addEventListener("click", () => show(index + 1));
     box.addEventListener("click", (e) => { if (e.target === box) close(); });
     document.addEventListener("keydown", (e) => {
       if (!box.classList.contains("is-open")) return;
@@ -143,7 +141,8 @@
       else if (e.key === "ArrowRight") show(index + 1);
       else if (e.key === "Tab") {
         const focusables = [...box.querySelectorAll("button:not([hidden])")];
-        const first = focusables[0], last = focusables[focusables.length - 1];
+        const first = focusables[0];
+        const last = focusables[focusables.length - 1];
         if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
         else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
       }
@@ -153,11 +152,10 @@
     box.addEventListener("touchend", (e) => {
       if (touchX === null) return;
       const dx = e.changedTouches[0].clientX - touchX;
-      if (Math.abs(dx) > 50) show(index + (dx < 0 ? 1 : -1));
+      if (Math.abs(dx) > 50 && group.length > 1) show(index + (dx < 0 ? 1 : -1));
       touchX = null;
     });
   }
 
-  const year = document.getElementById("year");
-  if (year) year.textContent = new Date().getFullYear();
+  document.querySelectorAll("[data-year]").forEach((el) => { el.textContent = new Date().getFullYear(); });
 })();

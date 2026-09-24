@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://olivernealdev.github.io/aleksander-warzynski/sitemap.xml

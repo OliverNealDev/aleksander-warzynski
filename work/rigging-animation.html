@@ -1,126 +1,108 @@
 <!doctype html>
-<html lang="en-GB" class="no-js">
+<html lang="en-GB">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Character Rig &amp; Animation Set (Maya, Unreal) · Aleksander Warzyński</title>
-  <meta name="description" content="Case study: a full character rig in Maya with IK/FK arms, finger controls and head space switching, driving eight game animations in Unreal Engine. Graded 88%.">
+  <title>Character Rig &amp; Animation, Maya and Unreal | Aleksander Warzyński</title>
+  <meta name="description" content="A character rig Aleksander Warzyński built in Maya, with IK/FK arms, finger controls and head space switching, driving eight game animations in Unreal Engine. Graded 88%.">
+  <meta name="author" content="Aleksander Warzyński">
   <link rel="canonical" href="https://olivernealdev.github.io/aleksander-warzynski/work/rigging-animation.html">
-  <meta name="theme-color" content="#eceaf9">
+  <meta name="theme-color" content="#121110">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Character Rig & Animation Set · Aleksander Warzyński">
+  <meta property="og:site_name" content="Aleksander Warzyński">
+  <meta property="og:title" content="Character Rig &amp; Animation | Aleksander Warzyński">
   <meta property="og:description" content="Maya rig with IK/FK switching and eight game animations running in Unreal Engine. Graded 88%.">
-  <meta property="og:image" content="https://olivernealdev.github.io/aleksander-warzynski/img/rig/poster.webp">
+  <meta property="og:url" content="https://olivernealdev.github.io/aleksander-warzynski/work/rigging-animation.html">
+  <meta property="og:image" content="https://olivernealdev.github.io/aleksander-warzynski/img/og/rigging-animation.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="The rigged character running in an Unreal Engine test level.">
   <meta name="twitter:card" content="summary_large_image">
-  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../favicon.png" type="image/png">
   <link rel="apple-touch-icon" href="../img/site/touch-icon.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="../fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to content</a>
+  <a class="skip" href="#main">Skip to content</a>
 
-  <header class="site-header">
+  <header class="top">
     <div class="wrap">
-      <a class="brand" href="../" aria-label="Aleksander Warzyński, home">
-        <span class="brand-mark" aria-hidden="true">AW</span>
-        <span class="brand-name">Aleksander Warzyński<small>3D Prop &amp; Environment Artist</small></span>
-      </a>
-      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Menu">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
-      </button>
-      <nav class="nav" id="site-nav" aria-label="Main">
-        <a href="../#work" aria-current="page">Work</a>
+      <a class="name" href="../">Aleksander Warzyński</a>
+      <nav aria-label="Main">
+        <a href="../#work">Work</a>
         <a href="../#about">About</a>
-        <a href="../#experience">Experience</a>
-        <a class="btn btn-primary" href="../#contact">Get in touch</a>
+        <a href="../cv.pdf">CV</a>
+        <a href="../#contact">Contact</a>
       </nav>
     </div>
   </header>
 
-  <main id="main">
-    <section class="cs-hero">
-      <div class="wrap">
-        <nav class="crumbs" aria-label="Breadcrumb"><a href="../#work">Work</a><span aria-hidden="true">/</span><span>Rig &amp; Animation</span></nav>
-        <span class="eyebrow">Rigging &amp; animation</span>
-        <h1>Character Rig &amp; Animation Set</h1>
-        <p class="cs-lede">A full character rig built in Maya, driving eight game animations set up in Unreal Engine. Maya wasn’t my comfort zone at first, but I pulled through and scored 88% for the module.</p>
-        <dl class="meta-grid">
-          <div><dt>Role</dt><dd>Rigging, skin weighting, animation, engine setup</dd></div>
-          <div><dt>Context</dt><dd>Degree module, 2024 – 25 · graded 88%</dd></div>
-          <div><dt>Output</dt><dd>8 animations, 2 built for additive blending</dd></div>
-          <div><dt>Tools</dt><dd>Autodesk Maya, Unreal Engine</dd></div>
-        </dl>
-        <div class="cs-cover video-frame">
-          <video controls preload="metadata" playsinline poster="../img/rig/poster.webp">
-            <source src="../video/animation-showcase.mp4" type="video/mp4">
-            Your browser can’t play this video. <a href="../video/animation-showcase.mp4">Download the animation showcase (MP4)</a>.
-          </video>
-        </div>
-        <p class="embed-note">Animation showcase in Unreal Engine (1 min, with sound).</p>
+  <main id="main" class="wrap">
+    <div class="project-head">
+      <p class="back"><a href="../#work">← All work</a></p>
+      <h1>Character Rig &amp; Animation</h1>
+      <p class="sub">Maya rig and eight game animations in Unreal Engine, 2024/25</p>
+    </div>
+
+    <div class="project-intro">
+      <div class="prose">
+        <p>One of my assignments in 2024/25 was to rig and animate a character fully in Maya. At first it seemed like a daunting task, and Maya was definitely not my cup of tea, but I pulled through and scored 88% for the module.</p>
+        <p>The character model is a <a href="https://sketchfab.com/3d-models/lethal-company-model-42caefc3e44e4ff59dcf55abd07cd45a">Lethal Company model from Sketchfab</a>, so I didn’t make it. The rig, skinning and animation are all my own work.</p>
+      </div>
+      <dl class="specs">
+        <div><dt>Role</dt><dd>Rigging, skin weights, animation, engine setup</dd></div>
+        <div><dt>Course</dt><dd>Foundation Degree, Games Technologies</dd></div>
+        <div><dt>Grade</dt><dd>88%</dd></div>
+        <div><dt>Output</dt><dd>8 animations, 2 made for additive blending</dd></div>
+        <div><dt>Software</dt><dd>Maya, Unreal Engine</dd></div>
+      </dl>
+    </div>
+
+    <figure class="cover">
+      <video controls preload="metadata" playsinline poster="../img/rig/poster.webp">
+        <source src="../video/animation-showcase.mp4" type="video/mp4">
+        <a href="../video/animation-showcase.mp4">Download the animation showcase (MP4)</a>
+      </video>
+      <figcaption>Animation showcase in Unreal Engine, 1 minute</figcaption>
+    </figure>
+
+    <section class="chapter" aria-labelledby="animations">
+      <h2 id="animations">Animations</h2>
+      <div class="prose">
+        <p>I made eight animations: idle, walk, run, look around, stretch, wave, dance and death. Each one had its own challenges and quirks, and I worked to keep them cohesive and consistent in quality. Two of them were made specifically for <strong>additive blending</strong> with the others inside the engine.</p>
       </div>
     </section>
 
-    <section class="cs-section">
-      <div class="wrap cs-split">
-        <header class="reveal">
-          <span class="eyebrow">Animation</span>
-          <h2>Eight animations</h2>
-        </header>
-        <div>
-          <div class="prose reveal">
-            <p>Each animation came with its own challenges and quirks, and I worked to keep them cohesive and consistent in quality. Two were built specifically for <strong>additive blending</strong> with the other animations inside the engine.</p>
-          </div>
-          <ul class="anim-list reveal" aria-label="Animations">
-            <li>Idle</li><li>Walk</li><li>Run</li><li>Look around</li><li>Stretch</li><li>Wave</li><li>Dance</li><li>Death</li>
-          </ul>
-        </div>
+    <section class="chapter" aria-labelledby="rig">
+      <h2 id="rig">The rig</h2>
+      <div class="prose">
+        <p>I built the rig with accurate skin weights and controls that are easy to use, so animating it later would be quick.</p>
       </div>
+      <ul class="plain-list">
+        <li><b>IK/FK arms.</b> A switch control on each arm blends the upper arm, lower arm and wrist between the IK and FK chains.</li>
+        <li><b>Finger controls.</b> Curls for each finger live as attributes on the arm switch, so the whole hand poses from one control.</li>
+        <li><b>Head space switching.</b> The FK head control can follow the chest or hold its orientation in world space.</li>
+        <li><b>Readable controls.</b> Left and right are colour coded, with IK foot controls, knee pole vectors and rings around the torso.</li>
+      </ul>
+      <div class="shots shots--three">
+        <figure><a href="../img/rig/rig-full.webp" data-lightbox="rig" data-caption="The full control rig in Maya."><img src="../img/rig/rig-full.webp" width="725" height="680" loading="lazy" alt="The character in an orange suit in Maya with rig controls: torso rings, arm controls, foot squares and knee pole vectors."></a><figcaption>The full control rig in Maya</figcaption></figure>
+        <figure><a href="../img/rig/rig-ikfk.webp" data-lightbox="rig" data-caption="Arm switch control with the IK/FK blend and finger curls."><img src="../img/rig/rig-ikfk-sm.webp" srcset="../img/rig/rig-ikfk-sm.webp 800w, ../img/rig/rig-ikfk.webp 1052w" sizes="(max-width: 700px) 94vw, 410px" width="1052" height="753" loading="lazy" alt="Maya channel box for the left arm switch, showing an IKFKSwitch attribute and pinky, ring, middle, index and thumb controls, with outputs to upper arm, lower arm and wrist blend nodes."></a><figcaption>Arm switch: IK/FK blend and finger curls</figcaption></figure>
+        <figure><a href="../img/rig/rig-head.webp" data-lightbox="rig" data-caption="Head control with a world and chest space switch."><img src="../img/rig/rig-head-sm.webp" srcset="../img/rig/rig-head-sm.webp 800w, ../img/rig/rig-head.webp 980w" sizes="(max-width: 700px) 94vw, 410px" width="980" height="624" loading="lazy" alt="Maya channel box for the FK head control, showing a World Chest Switch attribute."></a><figcaption>Head control with world and chest space</figcaption></figure>
+      </div>
+      <p class="small">This project is also on <a href="https://www.artstation.com/artwork/Y8aBx3">ArtStation</a>, with a subtitled breakdown video.</p>
     </section>
 
-    <section class="cs-section">
-      <div class="wrap cs-split">
-        <header class="reveal">
-          <span class="eyebrow">Rigging</span>
-          <h2>Built to be animated</h2>
-        </header>
-        <div>
-          <div class="prose reveal">
-            <p>I built the rig with accurate skin weights and convenient controls, so it would be quick to animate with later.</p>
-          </div>
-          <ul class="feature-list reveal">
-            <li><b>IK/FK arms</b>A switch control on each arm blends the upper arm, lower arm and wrist between IK and FK chains.</li>
-            <li><b>Finger controls</b>Pinky, ring, middle, index and thumb curls live as attributes on the arm switch, so hands pose from one control.</li>
-            <li><b>Head space switching</b>The FK head control can follow the chest or hold its orientation in world space.</li>
-            <li><b>Colour-coded controls</b>Left and right sides are colour-coded, with IK foot controls, knee pole vectors and torso rings for readability in the viewport.</li>
-          </ul>
-          <div class="gallery">
-            <figure class="fit reveal"><a href="../img/rig/rig-full.webp" data-lightbox="rig" data-caption="Full rig in Maya: colour-coded controls, IK feet and knee pole vectors."><img src="../img/rig/rig-full.webp" width="725" height="680" loading="lazy" alt="The character in an orange suit in Maya with rig controls: torso rings, arm controls, foot squares and knee pole vectors."></a><figcaption>Full control rig in Maya</figcaption></figure>
-            <figure class="fit reveal"><a href="../img/rig/rig-head.webp" data-lightbox="rig" data-caption="Head control with a world / chest space switch."><img src="../img/rig/rig-head-sm.webp" srcset="../img/rig/rig-head-sm.webp 800w, ../img/rig/rig-head.webp 980w" sizes="(max-width: 760px) 100vw, 430px" width="980" height="624" loading="lazy" alt="Maya channel box for the FK head control, showing a World Chest Switch attribute."></a><figcaption>Head control: world / chest space switch</figcaption></figure>
-            <figure class="w12 reveal"><a href="../img/rig/rig-ikfk.webp" data-lightbox="rig" data-caption="Arm switch control: IK/FK blend plus finger-curl attributes."><img src="../img/rig/rig-ikfk-sm.webp" srcset="../img/rig/rig-ikfk-sm.webp 800w, ../img/rig/rig-ikfk.webp 1052w" sizes="(max-width: 900px) 100vw, 860px" width="1052" height="753" loading="lazy" alt="Maya channel box for the left arm switch, showing an IKFKSwitch attribute and pinky, ring, middle, index and thumb controls, with outputs to upper arm, lower arm and wrist blend nodes."></a><figcaption>Arm switch: IK/FK blend and finger curls</figcaption></figure>
-          </div>
-          <p class="note reveal" style="margin-top:20px">The character model is a <a href="https://sketchfab.com/3d-models/lethal-company-model-42caefc3e44e4ff59dcf55abd07cd45a" target="_blank" rel="noopener">Lethal Company model from Sketchfab</a> and was not made by me. The rig, skinning and animation are my own work.</p>
-          <p class="embed-note reveal" style="margin-top:12px">Also on <a href="https://www.artstation.com/artwork/Y8aBx3" target="_blank" rel="noopener">ArtStation ↗</a></p>
-        </div>
-      </div>
-    </section>
-
-    <section class="cs-section">
-      <div class="wrap">
-        <a class="next reveal" href="shri-devis-dice.html" style="--next-img:url('../img/dice/overview-sm.webp')">
-          <div><small>Back to the start</small><strong>Shri Devi’s Dice</strong></div>
-          <span class="circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
-        </a>
-      </div>
-    </section>
+    <nav class="pager" aria-label="More projects">
+      <a href="ritual-props.html"><small>Previous project</small>Ritual Prop Set</a>
+      <a class="next" href="shri-devis-dice.html"><small>Back to the start</small>Shri Devi’s Dice</a>
+    </nav>
   </main>
 
-  <footer class="site-footer">
+  <footer class="foot">
     <div class="wrap">
-      <span>© <span id="year">2026</span> Aleksander Warzyński · FLOART</span>
-      <a href="../#contact">Get in touch →</a>
+      <span>© <span data-year>2026</span> Aleksander Warzyński (FLOART)</span>
+      <a href="mailto:floart108@gmail.com">floart108@gmail.com</a>
     </div>
   </footer>
   <script src="../js/main.js" defer></script>
