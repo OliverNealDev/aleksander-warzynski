@@ -6,12 +6,12 @@ Live at **https://olivernealdev.github.io/aleksander-warzynski/**
 No build step: plain HTML, CSS and a little vanilla JS. GitHub Pages serves the `main` branch root.
 
 ```
-index.html              Home: intro, work, quote, about, experience, contact
+index.html              Home: hero, selected work, testimonial, about, experience, contact
 work/*.html             One page per project
 cv.html / cv.pdf        CV (the PDF is printed from cv.html, see below)
 css/style.css           All styles (colour tokens at the top of the file)
-js/main.js              Lightbox, texture-map switcher, rig preview clip, copy-email button
-fonts/archivo.woff2     Archivo, subset to Latin + Polish (OFL, see fonts/OFL.txt)
+js/main.js              Nav, lightbox, texture-map switcher, rig preview clip
+fonts/archivo.woff2     Archivo for the CV, subset to Latin + Polish (OFL, see fonts/OFL.txt)
 img/<project>/          Images: name.webp (full size) + name-sm.webp (800px)
 img/og/                 1200×630 JPGs used for link previews (LinkedIn doesn't like WebP)
 video/                  Animation showcase + short hover loop
